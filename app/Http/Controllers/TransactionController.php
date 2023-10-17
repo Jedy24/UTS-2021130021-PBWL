@@ -13,7 +13,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return view('transactions.index');
+        $transactions = Transaction::all();
+        return view('transactions.index', compact('transactions'));
     }
 
     /**
@@ -51,7 +52,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        return view('transactions.show', compact('transation'));
     }
 
     /**
