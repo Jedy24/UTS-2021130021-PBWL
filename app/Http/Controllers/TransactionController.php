@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -12,7 +13,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        return view('transactions.index');
     }
 
     /**
@@ -20,7 +21,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        return view('transactions.create');
     }
 
     /**
@@ -28,7 +29,21 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'amount' => 'required|numeric|min:1',
+            'type' => 'required|in:income,expense',
+            'category' => 'required',
+            'notes' => 'nullable',
+        ]);
+
+        $transaction = Transaction::create([
+            'amount' => $validated['amount'],
+            'type' => $validated['type'],
+            'category' => $validated['category'],
+            'notes' => $validated['notes'],
+        ]);
+
+        return redirect()->route('transactions.index')->with('success', 'Transaction added successfully');
     }
 
     /**

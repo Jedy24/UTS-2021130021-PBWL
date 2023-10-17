@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,5 @@ use App\Http\Controllers\LandingController;
 */
 
 Route::get('/', LandingController::class)->name('landing');
+
+Route::resource('transactions', TransactionController::class);
