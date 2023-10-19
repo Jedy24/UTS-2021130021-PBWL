@@ -17,6 +17,49 @@
     @endif
 
     <div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Total Income</h5>
+                    <p class="card-text">Rp. {{ number_format($totalIncome, 0, ',', '.') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Total Expense</h5>
+                    <p class="card-text">Rp. {{ number_format($totalExpense, 0, ',', '.') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Balance</h5>
+                    <p class="card-text">Rp. {{ number_format($balance, 0, ',', '.') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Total Transactions Income</h5>
+                    <p class="card-text">{{ $incomeCount }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Total Transactions Expense</h5>
+                    <p class="card-text">{{ $expenseCount }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
         <table class="table table-bordered mb-5">
             <thead>
                 <tr class="table-success">

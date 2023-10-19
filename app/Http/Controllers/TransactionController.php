@@ -13,8 +13,14 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::paginate(20);
-        return view('transactions.index', compact('transactions'));
+        $transactions = Transaction::orderBy('created_at', 'desc')->paginate(20);
+        $totalIncome = Transaction::where('type', 'income')->sum('amount');
+        $totalExpense = Transaction::where('type', 'expense')->sum('amount');
+        $balance = $totalIncome-$totalExpense;
+        $incomeCount = Transaction::where('type', 'income')->count();
+        $expenseCount = Transaction::where('type', 'expense')->count();
+
+        return view('transactions.index', compact('transactions', 'totalIncome', 'totalExpense', 'balance', 'incomeCount', 'expenseCount'));
     }
 
     /**
@@ -31,7 +37,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'amount' => 'required|numeric|min:1',
+            'amount' => 'required|numeric|min:0',
             'type' => 'required|string',
             'category' => 'required|string',
             'notes' => 'nullable|string',
@@ -74,7 +80,7 @@ class TransactionController extends Controller
     public function update(Request $request, Transaction $transaction)
     {
         $validated = $request->validate([
-            'amount' => 'required|numeric|min:1',
+            'amount' => 'required|numeric|min:0',
             'type' => 'required|string',
             'category' => 'required|string',
             'notes' => 'nullable|string',
