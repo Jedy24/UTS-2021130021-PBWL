@@ -4,10 +4,12 @@
 
 @section('content')
     <div class="mt-4 p-5 bg-black text-white rounded">
-        <h1>Transaction List</h1>
-
-        {{-- Add button --}}
-        <a href="{{ route('transactions.create') }}" class="btn btn-primary btn-sm">Add New Transaction</a>
+        <div class="row">
+            <div class="col text-center">
+                <h1>Transaction List</h1>
+                <a href="{{ route('transactions.create') }}" class="btn btn-primary btn-sm">Add New Transaction</a>
+            </div>
+        </div>
     </div>
 
     @if (session()->has('success'))
