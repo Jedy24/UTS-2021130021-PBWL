@@ -17,7 +17,7 @@ class TransactionSeeder extends Seeder
 
         for ($i=0; $i < 100 ; $i++) {
             //Generate amount 1-999999999 dengan 2 desimal
-            $amount = $faker->randomFloat(2, 1, 999999999);
+            $amount = $faker->randomFloat(0, 1, 999999999);
             //Generate type income atau expense
             $type = $faker->randomElement(['income', 'expense']);
             //Generate category berdasarkan typenya apa
