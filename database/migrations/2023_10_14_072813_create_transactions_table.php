@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->float('amount')->default(0);
+            $table->float('amount', 13, 2)->default(0);
             $table->string('type');
             $table->string('category')->default('Uncategorized');
             $table->text('notes')->nullable();
