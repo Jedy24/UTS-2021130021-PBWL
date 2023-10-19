@@ -29,6 +29,7 @@
                 <div class="mb-3 col-md-12 col-sm-12">
                     <label for="type" class="form-label">Type</label>
                     <select class="form-control" id="type" name="type" required>
+                        <option disabled selected="selected">Choose Option</option>
                         <option value="income" {{ old('type') === 'income' ? 'selected' : ''}}>Income</option>
                         <option value="expense" {{ old('type') === 'expense' ? 'selected' : ''}}>Expense</option>
                     </select>
@@ -37,18 +38,6 @@
                 <div class="mb-3 col-md-12 col-sm-12">
                     <label for="category" class="form-label">Category</label>
                     <select id="category" name="category" class="form-control" required>
-                        @if(old('type') === 'income')
-                            <option value="uncategorized">Uncategorized</option>
-                        @elseif(old('type') === 'expense')
-                            <option value="uncategorized">Uncategorized</option>
-                            <option value="food & drinks">Food & Drinks</option>
-                            <option value="shopping">Shopping</option>
-                            <option value="charity">Charity</option>
-                            <option value="housing">Housing</option>
-                            <option value="insurance">Insurance</option>
-                            <option value="taxes">Taxes</option>
-                            <option value="transportation">Transportation</option>
-                        @endif
                     </select>
                 </div>
 
@@ -62,4 +51,35 @@
             </form>
         </div>
     </div>
+
+    <script>
+    // Klasifikasi dropdown type dan kategori
+    var typeDropdown = document.getElementById('type');
+    var categoryDropdown = document.getElementById('category');
+
+    // Pilihan untuk dropdown kategori
+    var categoryOptions = {
+        income: ['Uncategorized', 'Wage', 'Bonus', 'Gift'],
+        expense: ['Uncategorized', 'Food & Drinks', 'Shopping', 'Charity', 'Housing', 'Insurance', 'Taxes', 'Transportation']
+    };
+
+    // Event listener untuk update kategori sesuai type
+    typeDropdown.addEventListener('change', function() {
+        categoryDropdown.innerHTML = '';
+
+        // Membuat opsi baru sesuai dengan type
+        var selectedType = typeDropdown.value;
+        categoryOptions[selectedType].forEach(function(category) {
+            addCategoryOption(category);
+        });
+    });
+
+    // Fungsi untuk menambah opsi kedalam kategori
+    function addCategoryOption(value) {
+        var option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        categoryDropdown.appendChild(option);
+    }
+    </script>
 @endsection

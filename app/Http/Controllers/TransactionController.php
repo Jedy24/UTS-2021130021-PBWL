@@ -32,9 +32,9 @@ class TransactionController extends Controller
     {
         $validated = $request->validate([
             'amount' => 'required|numeric|min:1',
-            'type' => 'required|in:income,expense',
-            'category' => 'required',
-            'notes' => 'nullable',
+            'type' => 'required|string',
+            'category' => 'required|string',
+            'notes' => 'nullable|string',
         ]);
 
         $transaction = Transaction::create([

@@ -33,9 +33,9 @@
             <tbody>
                 @forelse ($transactions as $transaction)
                     <tr>
-                        <th scope="row">{{ $transaction->id }}</th>
-                        <td><a href="{{ route('transactions.show', $transaction) }}">{{ $transaction->amount }}</a></td>
-                        <td>{{ $transaction->type }}</td>
+                        <th scope="row"><a href="{{ route('transactions.show', $transaction) }}">{{ $transaction->id }}</a></th>
+                        <td>Rp. {{ number_format($transaction->amount, 0, ',', '.') }}</td>
+                        <td>{{ ucfirst($transaction->type) }}</td>
                         <td>{{ $transaction->category }}</td>
                         <td>{{ $transaction->notes }}</td>
                         <td>{{ $transaction->created_at }}</td>
