@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -11,6 +12,7 @@ class LandingController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('landing');
+        $transactions = Transaction::query()->latest()->paginate(20);
+        return view('landing', compact('transactions'));
     }
 }
