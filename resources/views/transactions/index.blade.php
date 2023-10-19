@@ -36,7 +36,7 @@
                         <th scope="row"><a href="{{ route('transactions.show', $transaction) }}">{{ $transaction->id }}</a></th>
                         <td>Rp. {{ number_format($transaction->amount, 0, ',', '.') }}</td>
                         <td>{{ ucfirst($transaction->type) }}</td>
-                        <td>{{ $transaction->category }}</td>
+                        <td>{{ ucfirst($transaction->category) }}</td>
                         <td>{{ $transaction->notes }}</td>
                         <td>{{ $transaction->created_at }}</td>
                         <td>{{ $transaction->updated_at }}</td>
