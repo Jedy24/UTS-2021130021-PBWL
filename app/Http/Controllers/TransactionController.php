@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -71,7 +72,13 @@ class TransactionController extends Controller
             'expense' => ['Food & Drinks', 'Shopping', 'Charity', 'Housing', 'Insurance', 'Taxes', 'Transportation']
         ];
 
-        return view('transactions.edit', compact('transaction', 'categoryOptions'));
+        $categories = DB::table('transactions')
+            ->where('type', $transaction->type)
+            ->distinct()
+            ->pluck('category')
+            ->toArray();
+
+        return view('transactions.edit', compact('transaction', 'categoryOptions', 'categories'));
     }
 
     /**

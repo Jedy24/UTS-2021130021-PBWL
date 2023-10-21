@@ -42,9 +42,15 @@
                         @foreach($categoryOptions[$transaction->type] as $category)
                             <option value="{{ $category }}" {{ $category == $transaction->category ? 'selected' : '' }}>{{ $category }}</option>
                         @endforeach
+
+                        @foreach($categories as $category)
+                            @php
+                                $capitalizedCategory = ucwords($category);
+                            @endphp
+                            <option class="hidden-option" disabled value="{{ $category }}" {{ $category == $transaction->category ? 'selected' : '' }}>{{ $capitalizedCategory }}</option>
+                        @endforeach
                     </select>
                 </div>
-
 
                 <div class="mb-3 col-md-12 col-sm-12">
                     <label for="notes" class="form-label">Notes</label>
@@ -57,33 +63,20 @@
     </div>
 
     <script>
-    // Klasifikasi dropdown type dan kategori
-    var typeDropdown = document.getElementById('type');
-    var categoryDropdown = document.getElementById('category');
+        var categoryDropdown = document.getElementById('category');
+        var hiddenOptions = categoryDropdown.querySelectorAll('.hidden-option');
 
-    // Pilihan untuk dropdown kategori
-    var categoryOptions = {
-        income: ['Uncategorized', 'Wage', 'Bonus', 'Gift'],
-        expense: ['Uncategorized', 'Food & Drinks', 'Shopping', 'Charity', 'Housing', 'Insurance', 'Taxes', 'Transportation']
-    };
+        // Hide disabled option
+        function hideDisabledOptions() {
+            hiddenOptions.forEach(function(option) {
+                option.style.display = 'none';
+            });
+        }
 
-    // Event listener untuk update kategori sesuai type
-    typeDropdown.addEventListener('change', function() {
-        categoryDropdown.innerHTML = '';
+        hideDisabledOptions();
 
-        // Membuat opsi baru sesuai dengan type
-        var selectedType = typeDropdown.value;
-        categoryOptions[selectedType].forEach(function(category) {
-            addCategoryOption(category);
+        categoryDropdown.addEventListener('change', function() {
+            hideDisabledOptions();
         });
-    });
-
-    // Fungsi untuk menambah opsi kedalam kategori
-    function addCategoryOption(value) {
-        var option = document.createElement('option');
-        option.value = value;
-        option.textContent = value;
-        categoryDropdown.appendChild(option);
-    }
     </script>
 @endsection
