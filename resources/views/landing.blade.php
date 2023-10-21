@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <strong class="d-inline-block mb-2 text-primary">Transaction</strong>
                         <h2 class="card-title h4">{{ $transaction->id }}</h2>
-                        <p class="card-text">Amount: {{ $transaction->amount }}, Type: {{ ucfirst($transaction->type) }}, ....</p>
+                        <p class="card-text">Amount: Rp. {{ number_format($transaction->amount, 0, ',', '.') }}, Type: {{ ucfirst($transaction->type) }}, ....</p>
                         <a class="btn btn-primary" href="{{ route('transactions.show', $transaction) }}">Read more →</a>
                     </div>
                 </div>
