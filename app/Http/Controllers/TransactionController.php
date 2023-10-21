@@ -67,8 +67,8 @@ class TransactionController extends Controller
     public function edit(Transaction $transaction)
     {
         $categoryOptions = [
-            'income' => ['Uncategorized', 'Wage', 'Bonus', 'Gift'],
-            'expense' => ['Uncategorized', 'Food & Drinks', 'Shopping', 'Charity', 'Housing', 'Insurance', 'Taxes', 'Transportation']
+            'income' => ['Wage', 'Bonus', 'Gift'],
+            'expense' => ['Food & Drinks', 'Shopping', 'Charity', 'Housing', 'Insurance', 'Taxes', 'Transportation']
         ];
 
         return view('transactions.edit', compact('transaction', 'categoryOptions'));
