@@ -72,6 +72,7 @@ class TransactionController extends Controller
             'expense' => ['Food & Drinks', 'Shopping', 'Charity', 'Housing', 'Insurance', 'Taxes', 'Transportation']
         ];
 
+        //Mengambil data category dari database untuk data dummy atau faker
         $categories = DB::table('transactions')
             ->where('type', $transaction->type)
             ->distinct()

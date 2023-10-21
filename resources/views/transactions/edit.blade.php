@@ -47,6 +47,7 @@
                             @php
                                 $capitalizedCategory = ucwords($category);
                             @endphp
+                            {{-- disabled agar saat edit category yang dimunculkan sesuai dengan data --}}
                             <option class="hidden-option" disabled value="{{ $category }}" {{ $category == $transaction->category ? 'selected' : '' }}>{{ $capitalizedCategory }}</option>
                         @endforeach
                     </select>
